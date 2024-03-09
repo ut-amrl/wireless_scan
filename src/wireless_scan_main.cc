@@ -14,7 +14,7 @@ int main(int argc, char *argv[]) {
   iwrange range;
   const int sock = iw_sockets_open();
 
-  if (iw_get_range_info(sock, "wlan0", &range) < 0) {
+  if (iw_get_range_info(sock, FLAGS_interface.c_str(), &range) < 0) {
     fprintf(stderr, "Error during iw_get_range_info. Aborting.\n");
     exit(1);
   }
