@@ -47,10 +47,10 @@ int main(int argc, char *argv[]) {
 
   result = head.result;
   while (result != nullptr) {
-    printf("ESSID: %20s BSSID:%s Signal: %d\n", 
-           result->b.essid, 
+    printf("BSSID:%s Signal: %3d ESSID: %20s \n",
             GetBSSID(result).c_str(),
-           result->stats.qual.level);
+            result->stats.qual.level,
+            result->b.essid);
     result = result->next;
   }
 
