@@ -10,12 +10,12 @@ DEFINE_string(interface, "wlo1", "The interface to scan");
 std::string GetBSSID(const wireless_scan* result) {
   char bssid[18];
   snprintf(bssid, sizeof(bssid), "%02x:%02x:%02x:%02x:%02x:%02x",
-           result->ap_addr.sa_data[0],
-           result->ap_addr.sa_data[1],
-           result->ap_addr.sa_data[2],
-           result->ap_addr.sa_data[3],
-           result->ap_addr.sa_data[4],
-           result->ap_addr.sa_data[5]);
+           (result->ap_addr.sa_data[0] & 0xFF),
+           (result->ap_addr.sa_data[1] & 0xFF),
+           (result->ap_addr.sa_data[2] & 0xFF),
+           (result->ap_addr.sa_data[3] & 0xFF),
+           (result->ap_addr.sa_data[4] & 0xFF),
+           (result->ap_addr.sa_data[5] & 0xFF));
   return std::string(bssid);
 }
 
