@@ -7,6 +7,18 @@
 
 DEFINE_string(interface, "wlo1", "The interface to scan");
 
+std::string GetBSSID(const wireless_scan* result) {
+  char bssid[18];
+  snprintf(bssid, sizeof(bssid), "%02x:%02x:%02x:%02x:%02x:%02x",
+           result->ap_addr.sa_data[0],
+           result->ap_addr.sa_data[1],
+           result->ap_addr.sa_data[2],
+           result->ap_addr.sa_data[3],
+           result->ap_addr.sa_data[4],
+           result->ap_addr.sa_data[5]);
+  return std::string(bssid);
+}
+
 int main(int argc, char *argv[]) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
 
@@ -35,9 +47,9 @@ int main(int argc, char *argv[]) {
 
   result = head.result;
   while (result != nullptr) {
-    printf("ESSID: %20s BSSID:%14s Signal: %d\n", 
+    printf("ESSID: %20s BSSID:%s Signal: %d\n", 
            result->b.essid, 
-           result->ap_addr.sa_data,
+            GetBSSID(result).c_str(),
            result->stats.qual.level);
     result = result->next;
   }
