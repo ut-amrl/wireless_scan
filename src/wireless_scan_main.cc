@@ -5,10 +5,16 @@
 
 #include "gflags/gflags.h"
 
-DEFINE_string(interface, "wlan0", "The interface to scan");
+DEFINE_string(interface, "wlo1", "The interface to scan");
 
 int main(int argc, char *argv[]) {
   gflags::ParseCommandLineFlags(&argc, &argv, true);
+
+  // Check if running as root.
+  if (geteuid() != 0) {
+    fprintf(stderr, "WARNING: This program must be run as root to perform an active scan. Returning only cached results.\n");
+  }
+
   wireless_scan_head head;
   wireless_scan* result = nullptr;
   iwrange range;
@@ -29,7 +35,10 @@ int main(int argc, char *argv[]) {
 
   result = head.result;
   while (result != nullptr) {
-    printf("ESSID: %s Signal: %d\n", result->b.essid, result->stats.qual.level);
+    printf("ESSID: %20s BSSID:%14s Signal: %d\n", 
+           result->b.essid, 
+           result->ap_addr.sa_data,
+           result->stats.qual.level);
     result = result->next;
   }
 
