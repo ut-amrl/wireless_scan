@@ -27,6 +27,7 @@ int main(int argc, char *argv[]) {
     fprintf(stderr, "WARNING: This program must be run as root to perform an active scan. Returning only cached results.\n");
   }
 
+  printf("Performing scan on interface: %s\n", FLAGS_interface.c_str());
   wireless_scan_head head;
   wireless_scan* result = nullptr;
   iwrange range;
@@ -47,7 +48,7 @@ int main(int argc, char *argv[]) {
 
   result = head.result;
   while (result != nullptr) {
-    printf("BSSID:%s Signal: %3d ESSID: %20s \n",
+    printf("BSSID:%s Signal: %3d ESSID: \"%s\" \n",
             GetBSSID(result).c_str(),
             result->stats.qual.level,
             result->b.essid);
