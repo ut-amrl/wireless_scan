@@ -19,4 +19,4 @@ INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR}/src)
 
 ADD_EXECUTABLE(wireless_scan
     src/wireless_scan_main.cc)
-TARGET_LINK_LIBRARIES(simulator iw)
+TARGET_LINK_LIBRARIES(wireless_scan iw gflags)
