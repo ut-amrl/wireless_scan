@@ -1,4 +1,4 @@
-CMAKE_MINIMUM_REQUIRED(VERSION 3.27)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.21)
 PROJECT(wireless_scan)
 
 SET(CMAKE_CXX_FLAGS "-std=c++11 -march=native -Werror -Wall -g")
