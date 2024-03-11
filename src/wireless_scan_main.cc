@@ -3,7 +3,6 @@
 
 #include <iostream>
 
-DEFINE_string(interface, "wlo1", "The interface to scan");
 
 std::string GetBSSID(const wireless_scan* result) {
   char bssid[18];
