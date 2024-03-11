@@ -16,3 +16,10 @@ make
 ```bash
 sudo ./bin/wireless_scan
 ```
+
+Optional: Make the binary owned by root, and execute as root:
+
+```bash
+sudo chown root:root bin/wireless_scan
+sudo chmod 4755 bin/wireless_scan
+```
